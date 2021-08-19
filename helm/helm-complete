@@ -1,0 +1,85 @@
+targetSystem: "linux"
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  apiKeyExistingSecret:  <DATADOG_API_KEY_SECRET>
+  appKey:  <DATADOG_APP_KEY>
+  appKeyExistingSecret:  <DATADOG_APP_KEY_SECRET>
+  logLevel: DEBUG
+  kubeStateMetricsEnabled: true
+  clusterChecks:
+    enabled: true
+
+
+  nodeLabelsAsTags: {}
+  podLabelsAsTags: {}
+  podAnnotationsAsTags: {}
+  tags: []
+  checksCardinality:  # low, orchestrator or high (not set by default to avoid overriding existing DD_CHECKS_TAG_CARDINALITY configurations, the default value in the Agent is low)
+  kubelet:
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+
+  logs:
+    enabled: true
+    containerCollectAll: true
+    containerCollectUsingFiles: true
+
+  apm:
+    enabled: true
+    port: 8126
+
+  confd: {}
+  #   redisdb.yaml: |-
+  #     init_config:
+  #     instances:
+  #       - host: "name"
+  #         port: "6379"
+  #   kubernetes_state.yaml: |-
+  #     ad_identifiers:
+  #       - kube-state-metrics
+  #     init_config:
+  #     instances:
+  #       - kube_state_url: http://%%host%%:8080/metrics
+
+
+  processAgent:
+    enabled: true
+    processCollection: false
+
+  orchestratorExplorer:
+    enabled: true
+    container_scrubbing:
+      enabled: true
+
+  networkMonitoring:
+    enabled: true
+
+  securityAgent:
+    compliance:
+      enabled: true
+      checkInterval: 20m
+
+    runtime:
+      enabled: true
+      policies:
+        configMap:
+      syscallMonitor:
+        enabled: true
+
+  containerExclude:  "image:datadog/agent"
+
+agents:
+  enabled: true
+  image:
+    tag: 7.30.0-jmx
+
+clusterChecksRunner:
+  enabled: true
+
+  ## Define the Datadog image to work with.
+  image:
+    name: agent
+    tag: 7.30.0-jmx
