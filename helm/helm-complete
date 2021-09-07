@@ -4,7 +4,7 @@ datadog:
   apiKeyExistingSecret:  <DATADOG_API_KEY_SECRET>
   appKey:  <DATADOG_APP_KEY>
   appKeyExistingSecret:  <DATADOG_APP_KEY_SECRET>
-  logLevel: DEBUG
+  logLevel: INFO
   kubeStateMetricsEnabled: true
   clusterChecks:
     enabled: true
