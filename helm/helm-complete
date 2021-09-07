@@ -47,7 +47,7 @@ datadog:
 
   processAgent:
     enabled: true
-    processCollection: false
+    processCollection: true
 
   orchestratorExplorer:
     enabled: true
@@ -74,7 +74,7 @@ datadog:
 agents:
   enabled: true
   image:
-    tag: 7.30.0-jmx
+    tag: 7.30.0
 
 clusterChecksRunner:
   enabled: true
@@ -82,4 +82,4 @@ clusterChecksRunner:
   ## Define the Datadog image to work with.
   image:
     name: agent
-    tag: 7.30.0-jmx
+    tag: 7.30.0
